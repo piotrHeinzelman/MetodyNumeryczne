@@ -21,13 +21,17 @@ plot ( dataX(),dataY(),"bo");
 myX0 = -.9;
 myX1 = (2^.5)/2;
  
-%interp1
-interp1 = interpol( dataX() , dataY(), aryX ,"interp1" );
-plot ( aryX, interp1, "r-" );
 
-%spline 
-splineY = interpol( dataX() , dataY(), aryX ,"spline" );
-plot ( aryX, splineY, "g-" );
+
+%spline (s)
+color = ["g","b","y","c","m"];
+for  i=3:3
+    splineY = interpol( dataX() , dataY(), aryX , i );
+    plot ( aryX, splineY, ""+color(i+1)+":" );
+end
+
+%splineY = interpol( dataX() , dataY(), aryX , 4 );
+%plot ( aryX, splineY, "r-" );
 
 %points by spline
 myY0 = spline( dataX() , dataY(), myX0 );

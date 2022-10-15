@@ -1,0 +1,13 @@
+
+
+ funkcje spline() i interp1("spline") wygl¹daj¹ bardzo podobnie i mo¿liwe ¿e to te same implementacje interpolacje.
+
+ podobne wartoœci daje "makima" - jednak du¿a ró¿nica pojawia siê przy extrapolacji.	
+  "cubic" i "linear"- nie extrapoluje.
+
+ interpolacja liniowa - no wiadomo z nazwy jest liniowa. 
+ czy jest gorsZa ? no nie zawsze, bo to zale¿y od charakteru zjawiska/zjawisk które modelujemy. Mo¿e siê zdarzyæ ¿e bêdzie to najlepszy wybór.
+
+
+ wydaje mi siê ¿e metoda "cubic" i "spline" daje najlepsze rezultaty.
+ 

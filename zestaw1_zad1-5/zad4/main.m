@@ -19,6 +19,33 @@ end
 plot( x , y  , "r-");
 
 
+
+a= -1.5;
+b= 1.5;
+
+
+n=4;
+for k=0:5
+    xk(k+1) = ((b-a)/2)*cos( pi*((2*k+1) / (2*n+2)) ) +((b+a)/2);
+    xline(xk(k+1),":"); 
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function [y] = caclulate(x , aryX, aryY )
    y = caclulate0(x , aryX, aryY );
    y = y+caclulate1(x , aryX, aryY );

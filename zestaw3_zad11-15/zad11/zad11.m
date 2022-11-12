@@ -1,3 +1,5 @@
+clear all
+
 x=1:4;
 for i=1:4 
     x(i)=sum( getTK(i))
@@ -41,5 +43,5 @@ AkAry = [ 1   ,   -1     , -1
 end
 
 function y = f( x )
-   y =  exp(-.25*x);
+   y =  1/(1+exp(-.25*x));
 end

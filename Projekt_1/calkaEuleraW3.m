@@ -1,43 +1,25 @@
-% y1=i1
-% y2=i2
-% y3=uc
+% y1=i1  y2=i2   y3=uc
+function dY = calkaEulera( t, Y )
 
-function dY = calkaEuleraW3( t, Y )
+Uc=Y(3); 
+global systemParams Emode UGenType h;  
 
-global systemParams Emode UGenType h;    % dane wejsciowe
 R1=systemParams(1);     % R1=0.1;
 R2=systemParams(2);     % R2=10;
  C=systemParams(3);     % C=0.5;
 L1=systemParams(4);     % L1=3;
 L2=systemParams(5);     % L2=5;
- M=systemParams(6);     % M=0.8;
+D1=(L1/(Mn(Uc)))-((Mn(Uc))/L2);
+D2=((Mn(Uc))/L1)-(L2/(Mn(Uc)));
 
-D1=(L1/M)-(M/L2);
-D2=(M/L1)-(L2/M);
-
-
-% U 
-function u = e(t)
-    if ( UGenType(1)==0 )
-         u=(UGenType(2))*sin(t);    % <- SINUS
-
-    elseif  UGenType(1)==-1
-         u=(UGenType(2));           % <- constans
-
-    else    % rectangle
-         u=bitand ( round((t/(h*UGenType(1)))) , UGenType(2) );
-    end
-end   
-
- 
 
 % całkowanie Eulera zwykłe i ulepszone, zaleznie od parametru
-     if (Emode==1) 
-        dY = [ ( Y(1) + h*fdy1(t,Y) )
-               ( Y(2) + h*fdy2(t,Y) )
-               ( Y(3) + h*fdy3(t,Y) )];
+     if (Emode==1) % Yn+1=Y+hf( X+h/2 , Y+h/2*(f(X,Y)) ) % ulepszone
+        dY = [ ( Y(1) + h*fdy1( t+(h/2), Y+(h/2)*fdy1(t,Y)) )  % nieefektywne - jednak czytelniejsze TU dla celów dydaktycznych OK
+               ( Y(2) + h*fdy2( t+(h/2), Y+(h/2)*fdy2(t,Y)) )
+               ( Y(3) + h*fdy3( t+(h/2), Y+(h/2)*fdy3(t,Y)) )];
      
-     elseif (Emode==0) 
+     elseif (Emode==0) % Yn+1=Y+hf(X) % Zwykłe
         dY = [ ( Y(1) + h*fdy1(t,Y) )
                ( Y(2) + h*fdy2(t,Y) )
                ( Y(3) + h*fdy3(t,Y) )];
@@ -54,15 +36,12 @@ end
 
     % odseparowane poszczególne obliczenia 
     function dy1 = fdy1(t,Y)
-       dy1 =  -Y(1)*(R1/(M*D1)) + Y(2)*(R2/(L2*D1)) - Y(3)/(M*D1) + e(t)/(M*D1);
+       dy1 =  -Y(1)*(R1/((Mn(Uc))*D1)) + Y(2)*(R2/(L2*D1)) - Y(3)/((Mn(Uc))*D1) + e(t)/((Mn(Uc))*D1);
     end
-
-
 
     function dy2 = fdy2(t,Y)
-       dy2 = -Y(1)*(R1/(L1*D2)) +Y(2)*(R2/(M*D2)) - Y(3)/(L1*D2) + e(t)/(L1*D2);
+       dy2 = -Y(1)*(R1/(L1*D2)) +Y(2)*(R2/((Mn(Uc))*D2)) - Y(3)/(L1*D2) + e(t)/(L1*D2);
     end
-
 
     function dy3 = fdy3(t,Y)
        dy3 =  Y(1)*(1/C); 

@@ -1,10 +1,20 @@
 Start=[0,0,0];
-h=1e-2;
-t = 0:h:300;
+global h; h=1e-3;
+t = 0:h:45;
 Y=Start';
 
+setSystemParams ( [] );
+setEulerMode( 2 );
+setUGeneratorType ( [23.45,128] ); % "sinus"=[0,V], "const."=[-1,V], "rectangle"=[x,w][23.45,128] = w:3sek U=128V 
+% ,
+
+
+
+
+
+
 for i=1:length(t)-1
-        Y(:, i+1) = calkaEuleraW3( t(i) ,     Y(:, i), h , 0, "const.");  % "const.","sinus"
+        Y(:, i+1) = calkaEuleraW3( t(i) ,  Y(:, i)  );  % "const.","sinus"
 end
 
  

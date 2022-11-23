@@ -2,31 +2,50 @@
 % y2=i2
 % y3=uc
 
-function dY = calkaEuleraW3(t, Y, h , ulepszona, type )
+function dY = calkaEuleraW3( t, Y )
 
-% dane wejsciowe
-R1=0.1;
-R2=10;
-C=0.5;
-L1=3;
-L2=5;
-M=0.8;
-%type="sinus"; % wymuszenie napięcia
+global systemParams Emode UGenType h;    % dane wejsciowe
+R1=systemParams(1);     % R1=0.1;
+R2=systemParams(2);     % R2=10;
+ C=systemParams(3);     % C=0.5;
+L1=systemParams(4);     % L1=3;
+L2=systemParams(5);     % L2=5;
+ M=systemParams(6);     % M=0.8;
 
 D1=(L1/M)-(M/L2);
 D2=(M/L1)-(L2/M);
 
 
-    % całkowanie Eulera zwykłe i ulepszone, zaleznie od parametru
-     if (ulepszona==1) 
+% U 
+function u = e(t)
+    if ( UGenType(1)==0 )
+         u=(UGenType(2))*sin(t);    % <- SINUS
+
+    elseif  UGenType(1)==-1
+         u=(UGenType(2));           % <- constans
+
+    else    % rectangle
+         u=bitand ( round((t/(h*UGenType(1)))) , UGenType(2) );
+    end
+end   
+
+ 
+
+% całkowanie Eulera zwykłe i ulepszone, zaleznie od parametru
+     if (Emode==1) 
         dY = [ ( Y(1) + h*fdy1(t,Y) )
                ( Y(2) + h*fdy2(t,Y) )
                ( Y(3) + h*fdy3(t,Y) )];
      
-    else 
+     elseif (Emode==0) 
         dY = [ ( Y(1) + h*fdy1(t,Y) )
                ( Y(2) + h*fdy2(t,Y) )
                ( Y(3) + h*fdy3(t,Y) )];
+
+     elseif (Emode==2) % Power check
+        dY = [ ( 0 )
+               ( 0 )
+               ( 0 + fd4(t,Y) )];
     end
 
 %Dy1/dt = (1/C)*y2
@@ -49,29 +68,13 @@ D2=(M/L1)-(L2/M);
        dy3 =  Y(1)*(1/C); 
     end
 
-
-    % rodzaj wymuszenia napięcia
-    function u = e(t)
-        switch (type)
-            case "sinus"
-                u=sin(t);
-            case "const."
-                u=1;
-        end 
-    end    
-
-
+    function dy4 = fd4 (t,Y)
+       dy4 = 0 + e(t); 
+    end
+  
 end
 
-
-
-
-
-
-
-
-
-
+ 
 
 
 

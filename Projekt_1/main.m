@@ -1,3 +1,4 @@
+
 global CFG Mn UGen
 config(-1,[]);
 t = CFG(1,2):CFG(2,2):CFG(3,2);

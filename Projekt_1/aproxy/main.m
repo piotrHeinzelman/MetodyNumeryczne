@@ -1,7 +1,7 @@
 clear all;
 
 X = [ 20, 50, 100, 150, 200, 250, 280, 300 ];
-XX= 20:1:300;
+XX= 20:.1:300;
 Y = [ 0.46 , 0.64 , 0.78 , 0.68 , 0.44 , 0.23 , 0.18 , 0.18 ];
 
  
@@ -12,6 +12,7 @@ for i=1:length(XX)
     van(i)=vandermond(XX(i));
     cAP3(i)=aproxFun3st(XX(i));
     dAP5(i)=aproxFun5st(XX(i));
+    eFS3(i)=FunkcjaSklejana3Stopnia(XX(i));
 end    
 
 hold on;
@@ -21,9 +22,10 @@ plot( X,Y,"o" );
 %plot( XX,van,"-" ); % x - vandermond 7st.
 
 %plot( XX,cAP3,"-" ); % c - aproksymacja 3 st.
-plot( XX,dAP5,"-" ); % d - aproksymacja 5 st.
+%plot( XX,dAP5,"-" ); % d - aproksymacja 5 st.
 %legend("techData","Interpolacja Wielomianowa Newton","sklejana","aprox fun 3 stop.","aprox fun 5 stop.")
-legend("techData","aproksymacja funkcjami 5 stopnia" )
+plot( XX,eFS3,"-" ); % d - sklejane 3 st.
+legend("techData","aproksymacja funkcjami 3 stopnia" )
 
 % a
 % interpolacja wielomianowa
@@ -178,4 +180,93 @@ a=
     end
     y=0.270529360498919+x*(0.0102965513204268+x*(-5.28805197847902e-05+x*(-2.89019332648018e-08+x*(2.92192106012333e-10))));    
 
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% funkcja sklejana
+function y = FunkcjaSklejana3Stopnia( x )
+    X = [ 20, 50, 100, 150, 200, 250, 280, 300   ];   %% local data + aprox data
+    %Y = [ 0.46 , 0.64 , 0.78 , 0.68 , 0.44 , 0.23 , 0.18 , 0.18  ];
+    alp=.0; % alp = Y0 + alpha *h/3
+    bet=.0; % alp = Yn+1 alpha *h/3
+    Y = [ 0.46 , 0.64 , 0.78 , 0.68 , 0.44 , 0.23 , 0.18 , 0.18];    
+    C=[ 7.12000000000000, 4.80000000000000, 4.44000000000000, 3.94000000000000, 2.67000000000000, 1.54000000000000, 2.13000000000000, 5.08000000000000 ];
+
+
+    %x0  =X_(3);
+    %xi  =X_(3+i);
+    %xi_2=X_(3-2+i);
+    %xi=X_(3+i);
+    
+    sum=0;
+    for i=1:7
+        yi=O(i,x);
+        sum=sum+(yi*(C(i)));
+    end
+    y=sum;
+
+    function y=O(i,x)
+        X_ = [0 , 10 , 20 , 50 , 100 , 150 , 200, 250 , 280 , 300 , 320 , 340 ];
+        ximinus2=X_(i);
+        ximinus1=X_(i+1);
+        xi      =X_(i+2);
+        xiplus1 =X_(i+3);
+        xiplus2 =X_(i+4);
+        h=xi-xiplus1;
+        h_=1/(h*h*h);
+
+            if ( (x>ximinus2) && (x<=ximinus1)) y=h_*( (x-ximinus2)^3 ); 
+        elseif ( (x>ximinus1) && (x<=xi))       y=h_*( (x-ximinus2)^3 -4*((x-ximinus1)^3)  ); 
+        elseif ( (x>xi      ) && (x<=xiplus1))  y=h_*( (xiplus2-x)^3 -4*((xiplus1-x)^3)  ); 
+        elseif ( (x>xiplus1 ) && (x<=xiplus2))  y=h_*( (xiplus2-x)^3 ); 
+          else y=0;
+           end
+    end    
+
+    return;
+
+    % S(x) = ci-1*Oi-1(x) + ci*Oi(x) +ci+1*Oi+1(x) ... ci+1*Oi+1(x)
+
+    % 4c0 + 2c1              = y0 + (h/3)*alpha
+    %  c0 + 4c1 + c2         = y1
+    %        c1 + 4c2 + c3   = y2
+
+
+    A = [ 4, 2, 0, 0, 0, 0, 0, 0 
+          1, 4, 1, 0, 0, 0, 0, 0
+          0, 1, 4, 1, 0, 0, 0, 0
+          0, 0, 1, 4, 1, 0, 0, 0
+          0, 0, 0, 1, 4, 1, 0, 0
+          0, 0, 0, 0, 1, 4, 1, 0        
+          0, 0, 0, 0, 0, 1, 4, 1       
+          0, 0, 0, 0, 0, 0, 2, 4 ];
+
+    C=A*Y'
+
+    %{
+C0-Cn
+    7.12000000000000
+    4.80000000000000
+    4.44000000000000
+    3.94000000000000
+    2.67000000000000
+    1.54000000000000
+    2.13000000000000
+    5.08000000000000
+    %} 
+
+    
 end

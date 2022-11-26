@@ -32,9 +32,9 @@ function dY = stepEuler( t , Y ) % y1=i1  y2=i2   y3=uc
      elseif (Emode==2) % Power check
         dY = [ ( 0 )
                ( 0 )
-               ( 0 + fd4(t,Y) )];
+               ( uGen(t) )];
 
-     elseif (Emode==3) % Power check
+     elseif (Emode==3) % Mu(Uc) check
         dY = [ ( 0 )
                ( 0 )
                ( Mu(t*10)) ];
@@ -61,10 +61,6 @@ end
 
     function dy3 = fdy3(t,Y)
        dy3 =  Y(1)*(1/C); 
-    end
-
-    function dy4 = fd4 (t,Y)
-       dy4 = 0 + uGen(t); 
     end
 
 end 

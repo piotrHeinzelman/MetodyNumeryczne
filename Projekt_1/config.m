@@ -9,9 +9,9 @@ global CFG
     config( 4, [   3,     5,    0   ]); %  system params: 4 - L1 L2 M(not used!)
     config( 5, [   3,     0,    0   ]); %     Euler mode: 0 - normal, 1 - extended, 2 - power test, 3 - Mu(Uc) test
     config( 6, [   0,    240,   1   ]); % UGeneratorType: "const."[-1,V,?], "sinus"[0,V,*2πf], "rectangle": [ 2,Vmax,0 ][2,120,0]
-    config( 7, [   3,    0.8,   0   ]); % MjMode: "const" [0,value], [1..]-Vander [2]-Sklejane 1st [3]-apr. wielomian 3st [4]-apr 5 stopnia
-        UGen (CFG(:,6));
-      MuBuild(CFG(:,7));
+    config( 7, [   1,    0.8,   0   ]); % MjMode: "const" [0,value], [1..]-Vander [2]-Sklejane 1st [3]-apr. wielomian 3st [4]-apr 5 stopnia
+         UGen();
+      MuBuild();
     end    
 end
 %function setEulerMode( 1 ) end

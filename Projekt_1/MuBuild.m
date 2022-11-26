@@ -1,5 +1,6 @@
-function MuBuild( row )
-    global Mu
+function MuBuild()
+    global CFG Mu
+    row=CFG(:,7);
     switch(row(1))
         case 0
         str = horzcat("@(u) 0+", row(2));  
@@ -19,8 +20,8 @@ end
 
 
 function y = b_sklejana(u)
-    X = [ 20, 50, 100, 150, 200, 250, 280, 300   ]; 
-    Y = [ 0.46 , 0.64 , 0.78 , 0.68 , 0.44 , 0.23 , 0.18 , 0.18  ];
+    X = [ 0, 20, 50, 100, 150, 200, 250, 280, 300   ]; 
+    Y = [ .2 , 0.46 , 0.64 , 0.78 , 0.68 , 0.44 , 0.23 , 0.18 , 0.18  ];
     y=0;
     if (u>=X(1)) 
         if (u<=X(end))

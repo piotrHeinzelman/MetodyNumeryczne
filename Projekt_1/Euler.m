@@ -1,5 +1,5 @@
 function Y = Euler ( T )
-    global CFG uGen Mu D1 D2 Uc 
+    global CFG uGen  D1 D2 Uc 
     Y = [0,0,0,0]';
     %Y=CFG(:,1);
 
@@ -34,17 +34,20 @@ function dY = stepEuler( t , Y ) % y1=i1  y2=i2   y3=uc
      elseif (Emode==2) % Power check
         dY = [ ( 0 )
                ( 0 )
-               ( uGen(t) )];
+               ( uGen(t) )
+               (0)];
 
      elseif (Emode==3) % Mu(Uc) check
         dY = [ ( 0 )
                ( 0 )
-               ( Mu(t*10)) ];
+               ( Mu(t*10))
+               (0)];
 
      else %(Emode==0) % Yn+1=Y+hf(X) % Zwykłe
         dY = [ ( Y(1) + h*fdy1(t,Y) )
                ( Y(2) + h*fdy2(t,Y) )
-               ( Y(3) + h*fdy3(t,Y) )];
+               ( Y(3) + h*fdy3(t,Y) )
+               (Mu(Y(3))*10) ];
     end
 
 %Dy1/dt = (1/C)*y2
@@ -64,6 +67,27 @@ end
     function dy3 = fdy3(t,Y)
        dy3 =  Y(1)*(1/C); 
     end
+
+
+    
+
+    
+function y = Mu(u)
+    y=.8;
+    %{
+   multi=1; if (u<0) u=-u; multi=-1; end
+   if (u>400) y=0.18;
+   elseif (u>280)
+       y0=0.171013;y1=0.18;
+       y=y0+(y1-y0)*((u-280)/(400-280));
+   else
+   y=0.270529360498919+u*(0.0102965513204268+u*(-5.28805197847902e-05+u*(-2.89019332648018e-08+u*(2.92192106012333e-10))));    
+   end    
+   y=y*multi;
+    %}
+end
+
+
 
 end 
 

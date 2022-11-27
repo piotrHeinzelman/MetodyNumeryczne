@@ -1,7 +1,7 @@
 function Y = Euler ( T )
-    global CFG uGen Mu   
-    Y = CFG(:,1);
-    Uc=Y(3); 
+    global CFG uGen Mu D1 D2 Uc 
+    Y = [0,0,0,0]';
+    %Y=CFG(:,1);
 
 R1=CFG(1,3);     % R1=0.1;
 R2=CFG(2,3);     % R2=10;
@@ -11,8 +11,7 @@ L2=CFG(2,4);     % L2=5;
 
 Emode=CFG(1,5);
 h=CFG(2,2);
-D1=(L1/(Mu(Uc)))-((Mu(Uc))/L2);
-D2=((Mu(Uc))/L1)-(L2/(Mu(Uc)));
+
 
     for i=1:length(T)-1
             Y(:, i+1) = stepEuler( T(i) ,  Y(:, i) );  
@@ -22,12 +21,15 @@ D2=((Mu(Uc))/L1)-(L2/(Mu(Uc)));
 
 
 function dY = stepEuler( t , Y ) % y1=i1  y2=i2   y3=uc
-
+    Uc=Y(3); 
+    D1=(L1/(Mu(Y(3))))-((Mu(Y(3)))/L2);
+    D2=((Mu(Y(3)))/L1)-(L2/(Mu(Y(3))));
 % całkowanie Eulera zwykłe i ulepszone, zaleznie od parametru
      if (Emode==1) % Yn+1=Y+hf( X+h/2 , Y+h/2*(f(X,Y)) ) % ulepszone
         dY = [ ( Y(1) + h*fdy1( t+(h/2), Y+(h/2)*fdy1(t,Y)) )  % nieefektywne - jednak czytelniejsze TU dla celów dydaktycznych OK
                ( Y(2) + h*fdy2( t+(h/2), Y+(h/2)*fdy2(t,Y)) )
-               ( Y(3) + h*fdy3( t+(h/2), Y+(h/2)*fdy3(t,Y)) )];
+               ( Y(3) + h*fdy3( t+(h/2), Y+(h/2)*fdy3(t,Y)) ) 
+                 Mu(Y(3))*10 ];
      
      elseif (Emode==2) % Power check
         dY = [ ( 0 )

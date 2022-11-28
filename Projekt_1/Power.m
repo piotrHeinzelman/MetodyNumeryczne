@@ -12,7 +12,7 @@ for i=1:length(Y)
    Y(4,i)=Y(2,i)^2;
 end
 t = CFG(1,2):CFG(2,2):CFG(3,2);
-plot( t, Y(1,:), ":" , t, Y(2,:) , ":",t, Y(3,:) , "-" ,t, Y(4,:) , "-" );
+%plot( t, Y(1,:), ":" , t, Y(2,:) , ":",t, Y(3,:) , "-" ,t, Y(4,:) , "-" );
 
     if ( type==1 )
         s1 = calkaProstokat ( Y(3,:) );

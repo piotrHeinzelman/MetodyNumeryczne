@@ -5,7 +5,6 @@ function P = Pow(Fi)
  UGen(); 
  Y = Euler( t );
  po=Power(Y,0);
- info="100*sin(2πωt) f="+Fi+" Power = "+po+" : po-406=" + (po-406) + "."
+ info="100*sin(2πωt) f="+Fi+" Power = "+po+" : po-406=" + (po-406) + ".";
  P=po-406;
-
 end

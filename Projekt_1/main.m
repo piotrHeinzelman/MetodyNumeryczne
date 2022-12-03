@@ -25,8 +25,16 @@ end
 
 
 if (true)
-    Pow(1/2);
+    %Pow(1/2);
+    %Pow(1);
+    %  xx=bisekcja(1/2, 1, 1)
+    %  
+    %xx=Newton(1/2); %w stronę 1
+    %xx=Sieczne(.8 ,1);
+    Pow( 0.67133 )
+    %ans
 end    
+
 return
 
 %Y = Euler( t );
@@ -39,5 +47,3 @@ return
 % y1=i1
 % y2=i2
 % y3=uc
-
-

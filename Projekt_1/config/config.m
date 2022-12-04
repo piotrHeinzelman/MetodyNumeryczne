@@ -14,7 +14,6 @@ global CFG
     config( 8, [   0,     0,    0   ]);  % images number, section
 
          UGen();
-      MuBuild();
       setMj( (CFG(1,7)) , "" );
     end    
 end

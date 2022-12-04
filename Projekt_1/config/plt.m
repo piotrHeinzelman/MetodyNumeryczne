@@ -26,7 +26,8 @@ function plt()
             info = "u(t)=prostokat";
         end    
     end    
-    title(info + ", Eul:"+(CFG(1,5)) + ", M:"+(CFG(1,7)) );
+    if CFG(1,5)==0 eul="normalna" else eul="ulepszona" end
+    title(info + ", Eul: "+eul + ", M:"+(CFG(1,7)) );
     exportgraphics(tl, "INDD/links/" + imageNumber + "_" + imageSection + "_img_.png",'Resolution',600);
     clear plt
 end

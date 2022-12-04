@@ -36,17 +36,6 @@ function dY = stepEuler( t , Y ) % y1=i1  y2=i2   y3=uc
                ( i2 + h*fdy2( t+(h/2), Y+(h/2)*fdy2(t,Y)) )
                ( Uc + h*fdy3( t+(h/2), Y+(h/2)*fdy3(t,Y)) ) ];
      
-     elseif (Emode==2) % Power check
-        dY = [ ( e1 )
-               ( Uc )
-               ( UL )];
-
-     elseif (Emode==3) % Mu(Uc) check
-        dY = [ ( i1 )
-               ( UL )
-               ( MjUL ) ];
-
-
      else %(Emode==0) % Yn+1=Y+hf(X) % Zwykłe
         dY = [ ( i1 + h*fdy1(t,Y) )
                ( i2 + h*fdy2(t,Y) )

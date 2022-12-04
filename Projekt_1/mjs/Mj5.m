@@ -1,4 +1,5 @@
-function y = Mj6(u)
+% funkcja eksperymentalna - sklejana / aproksymowana wielomianami 3 stopnia
+function y = Mj5(u)
                 multi=1; if (u<0) u=-u; multi=-1; end
                 if (u>400) y=0.18;
                 elseif (u>280)

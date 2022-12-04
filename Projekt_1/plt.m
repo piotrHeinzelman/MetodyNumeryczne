@@ -5,15 +5,11 @@ function plt()
     CFG(1,8) = imageNumber; 
     imageSection= CFG(2,8);
 
-    t = CFG(1,2):CFG(2,2):CFG(3,2);
-
-    UGen();
-    MuBuild();
-    
+    t = CFG(1,2):CFG(2,2):CFG(3,2);    
     Y = Euler( t ); 
 
     hold off;
-    tl = tiledlayout(2,1);
+    tl = tiledlayout("flow");
 
     nexttile;
     plot(t,Y,"-");
@@ -30,8 +26,7 @@ function plt()
             info = "u(t)=prostokat";
         end    
     end    
-    title(info);
+    title(info + ", Eul:"+(CFG(1,5)) + ", M:"+(CFG(1,7)) );
     exportgraphics(tl, "INDD/links/" + imageNumber + "_" + imageSection + "_img_.png",'Resolution',600);
-    clear tl
     clear plt
 end

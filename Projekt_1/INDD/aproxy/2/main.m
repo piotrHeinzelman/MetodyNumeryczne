@@ -6,12 +6,9 @@ Y = [ 0.46 , 0.64 , 0.78 , 0.68 , 0.44 , 0.23 , 0.18 , 0.18 ];
 
  
 global vectorA
-vectorA = aproxFun5stVector();   
 
-for i=1:length(XX)
-    bSK(i)=FunkcjaSklejana(XX(i));
-    dAP5(i)=aproxFun5st(XX(i));
-end    
+bSK(i)=FunkcjaSklejana(XX(i));
+
 
 hold on;
 plot( X,Y,"o" );

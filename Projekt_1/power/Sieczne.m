@@ -2,7 +2,7 @@ function c = Sieczne(x0,x1)
 
     rot=1;
     %deltaX=1e-4;
-    %poniewaz 2 pochodna i funkcja mają znak ten sam (ulemny) po prawej stronie pierwiastka oboeram: X0=.7 X1=1        
+    %poniewaz 2 pochodna i funkcja mają znak ten sam (ujemny) po prawej stronie pierwiastka obieram: X0=.7 X1=1        
          %FPx0=Fprim(x0)
          %FPx1=Fprim(x1);
    %      FPPx0=Fprimprim(x0)

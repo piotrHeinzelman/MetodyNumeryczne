@@ -92,3 +92,42 @@ info=moc'
 
 end
 
+% Część 4 pow(Fi) moc od częstotliwości przy Mj=0.8 P=406[W] - wykres
+if (false)
+setSection(4);
+setMj( "const" );
+
+f=-1:.05:1;
+p=f;
+    for i=1:length(f)
+       p(i)=Pow(f(i));
+    end
+hold on
+xline(0,":");
+yline(0,":");
+plot(f,p,"-");    
+
+end
+
+% Część 5 miejsca zerowe
+if (true)
+setSection(5);
+setMj( "const" );
+
+%bisekcja
+c = bisekcja(0,0.3,1); info="sieczne: 0-0.3 "+ c
+c = bisekcja(0.3,1,1); info="sieczne: 0-0.3 "+ c
+
+% sieczne
+c = Sieczne(0,.3); info="sieczne: 0-0.3 "+ c
+c = Sieczne(.3,1); info="sieczne: 0.3-1 "+ c
+
+% newton
+c = Newton(0,.3); info="sieczne: 0-0.3 "+ c
+c = Newton(.3,1); info="sieczne: 0.3-1 "+ c
+
+end
+
+
+
+

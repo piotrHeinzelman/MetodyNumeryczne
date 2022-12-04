@@ -1,0 +1,86 @@
+function Y = Euler ( T )
+    import mjs.*
+    global CFG uGen Mu
+    Y=CFG(:,1);
+
+R1=CFG(1,3);     % R1=0.1;
+R2=CFG(2,3);     % R2=10;
+ C=CFG(3,3);     % C=0.5;
+L1=CFG(1,4);     % L1=3;
+L2=CFG(2,4);     % L2=5;
+
+Emode=CFG(1,5);
+h=CFG(2,2);
+
+
+for i=1:length(T)-1
+    Y(:, i+1) = stepEuler( T(i) ,  Y(:, i) );  
+end
+
+
+
+
+function dY = stepEuler( t , Y ) % y1=i1  y2=i2   y3=uc
+    i1=Y(1);
+    i2=Y(2);
+    Uc=Y(3); 
+    e1=uGen(t);
+    UL=  %UL=e-Uc-i1*R z prawa napięciowego Kirhoffa
+
+    D1=(L1/(Mu(Y(3))))-((Mu(Y(3)))/L2);
+    D2=((Mu(Y(3)))/L1)-(L2/(Mu(Y(3))));
+% całkowanie Eulera zwykłe i ulepszone, zaleznie od parametru
+     if (Emode==1) % Yn+1=Y+hf( X+h/2 , Y+h/2*(f(X,Y)) ) % ulepszone
+        dY = [ ( i1 + h*fdy1( t+(h/2), Y+(h/2)*fdy1(t,Y)) )  % nieefektywne - jednak czytelniejsze TU dla celów dydaktycznych OK
+               ( i2 + h*fdy2( t+(h/2), Y+(h/2)*fdy2(t,Y)) )
+               ( Uc + h*fdy3( t+(h/2), Y+(h/2)*fdy3(t,Y)) ) ];
+     
+     elseif (Emode==2) % Power check
+        dY = [ ( 0 )
+               ( 0 )
+               ( uGen(t) )];
+
+     elseif (Emode==3) % Mu(Uc) check
+        dY = [ ( 0 )
+               ( 0 )
+               ( Mu(t*10)) ];
+
+
+     else %(Emode==0) % Yn+1=Y+hf(X) % Zwykłe
+        dY = [ ( i1 + h*fdy1(t,Y) )
+               ( i2 + h*fdy2(t,Y) )
+               ( Uc + h*fdy3(t,Y) )];
+    end
+
+%Dy1/dt = (1/C)*y2
+%Dy2/dt= (1/L)*(E-Ry2-y1)
+end
+
+
+% odseparowane poszczególne obliczenia 
+    function dy1 = fdy1(t,Y)
+        i1=Y(1);
+        i2=Y(2);
+        Uc=Y(3);  
+
+       dy1 =  -i1*(R1/((Mu(Uc))*D1)) + i2*(R2/(L2*D1)) - Uc/((Mu(Uc))*D1) + e1/((Mu(Uc))*D1);
+    end
+
+    function dy2 = fdy2(t,Y)
+        i1=Y(1);
+        i2=Y(2);
+        Uc=Y(3);   
+        
+       dy2 = -i1*(R1/(L1*D2)) +i2*(R2/((Mu(Uc))*D2)) - Uc/(L1*D2) + uGen(t)/(L1*D2);
+    end
+
+    function dy3 = fdy3(t,Y)
+        i1=Y(1);
+        i2=Y(2);
+        Uc=Y(3);   
+
+       dy3 =  i1*(1/C); 
+    end
+end
+
+ 

@@ -1,0 +1,20 @@
+Projekt powinien obejmowaæ nastêpuj¹ce czêœci:
+
+    Implementacjê zadania numerycznego (rozwi¹zanie problemu technicznego zawieraj¹cego opis  modelu matematycznego).
+    Przeprowadzenie testów rozwi¹zania - weryfikacja rozwi¹zania (zaproponowan¹ przez studenta metodyk¹, np.: porównanie z rozwi¹zaniem analitycznym jakiegoœ modelu uproszczonego, o ile istnieje, weryfikacja z innym oprogramowaniem symulacyjnym, weryfikacja z oczekiwanymi wynikami wynikaj¹cymi z intuicji in¿ynierskiej lub konkretnych pomiarów).
+    Napisanie raportu prac eksperymentalnych obejmuj¹cego:
+        napisany w³asnymi s³owami opis modelu matematycznego,
+        napisany w³asnymi s³owami opis modelu numerycznego,
+        ogólny opis implementacji, zasady dzia³ania programu,
+        raport (zestawienie) wyników eksperymentu z interpretacj¹ rozwi¹zania.
+
+Bardzo proszê nie pisaæ wniosków. Niniejszy projekt nie zak³ada powstawania ¿adnych wniosków. Projekt zak³ada koniecznoœæ opisania ich interpretacji.
+
+Od strony formalnej powstaæ powinno kilka plików:
+
+    osobne pliki (skrypty .m w MATLABie lub .py, .jnbpy w Pythonie) z kodem Ÿród³owym do ka¿dej czêœci projektu,
+    plik z raportem (akceptowany tylko dokument w formacie PDF).
+
+Wiêcej szczegó³ów znajdzie siê w za³¹czonym dokumencie z opisem projektu.
+
+Projekt zaliczeniowy.

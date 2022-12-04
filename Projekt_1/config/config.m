@@ -14,6 +14,6 @@ global CFG
     config( 8, [   0,     0,    0   ]);  % images number, section
 
          UGen();
-      setMj( (CFG(1,7)) , "" );
+      set_Mj( (CFG(1,7)) );
     end    
 end

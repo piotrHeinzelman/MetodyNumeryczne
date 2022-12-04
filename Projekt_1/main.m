@@ -8,7 +8,7 @@ prepare();
 
 setSection(0);
 % Część 1
-if (true)
+if (false)
 setSection(1);    
 setEuler("normal");
 setMj( 0,"const" );
@@ -37,5 +37,5 @@ setMj("inter");    setUSin( 240 , 2 ); plt(); setUSin( 120 , 2 ); plt();
 setMj("sklejana"); setUSin( 240 , 2 ); plt(); setUSin( 120 , 2 ); plt();
 setMj("ap3st");    setUSin( 240 , 2 ); plt(); setUSin( 120 , 2 ); plt();
 setMj("ap5st");    setUSin( 240 , 2 ); plt(); setUSin( 120 , 2 ); plt(); 
-  
+setMj("crazy");    setUSin( 240 , 2 ); plt(); setUSin( 120 , 2 ); plt();   
 end

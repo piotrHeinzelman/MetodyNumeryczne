@@ -115,16 +115,16 @@ setSection(5);
 setMj( "const" );
 
 %bisekcja
-c = bisekcja(0,0.3,1); info="sieczne: 0-0.3 "+ c
-c = bisekcja(0.3,1,1); info="sieczne: 0-0.3 "+ c
+c = bisekcja(0.0, 0.1 ,1); info="bisekcja: 0.0 - 0.1"+ c
+c = bisekcja(0.5, 1.0 ,1); info="bisekcja: 0.5 - 1.0"+ c
 
 % sieczne
-c = Sieczne(0,.3); info="sieczne: 0-0.3 "+ c
-c = Sieczne(.3,1); info="sieczne: 0.3-1 "+ c
+c = Sieczne(0.3 , 0.1); info="sieczne: 0.3 - 0.1"+ c
+c = Sieczne(1.0 , 0.7); info="sieczne: 1.0 - 0.7"+ c
 
 % newton
-c = Newton(0,.3); info="sieczne: 0-0.3 "+ c
-c = Newton(.3,1); info="sieczne: 0.3-1 "+ c
+c = Newton(.1); info="Newton: 0.1 "+ c
+c = Newton(.7); info="Newton: 0.7 "+ c
 
 end
 
